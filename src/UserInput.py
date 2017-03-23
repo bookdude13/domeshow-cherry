@@ -17,6 +17,7 @@ class UserInput:
             default='/tmp/cherrylog')
         parser.add_argument(
             '--speed',
+            type=int,
             default=1000)
         return parser.parse_args()
 
