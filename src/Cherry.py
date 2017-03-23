@@ -9,7 +9,7 @@ import pattern.FullRandom as full_random
 import pattern.Tsunami as tsunami
 import pattern.Sarlacc as sarlacc
 import pattern.Radar as radar
-import pattern.CounterRotatingCircles as crc
+import pattern.CounterRotatingCircles as ctr_rot_circles
 import pattern.BeachBall as beach_ball
 import pattern.Pulse as pulse
 import pattern.Spiral as spiral
@@ -28,7 +28,7 @@ pattern_makers = [
     lambda: (tsunami.get_pattern(tick_period_ms=user_input.speed), 'Tsunami'),
     lambda: (sarlacc.get_pattern(tick_period_ms=user_input.speed), 'Sarlacc'),
     lambda: (radar.get_pattern(tick_period_ms=user_input.speed), 'Radar'),
-    lambda: (crc.get_pattern(tick_period_ms=user_input.speed), 'Counter Rotating Circles'),
+    lambda: (ctr_rot_circles.get_pattern(tick_period_ms=user_input.speed), 'Counter Rotating Circles'),
     lambda: (beach_ball.get_pattern(tick_period_ms=user_input.speed), 'Beach Ball'),
     lambda: (pulse.get_pattern(tick_period_ms=user_input.speed), 'Pulse'),
     lambda: (spiral.get_pattern(tick_period_ms=user_input.speed), 'Spiral')
