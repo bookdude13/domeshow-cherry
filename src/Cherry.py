@@ -23,15 +23,16 @@ user_input = UserInput()
 # allocations, as well as to guarantee different versions of
 # each pattern on every call.
 # The format for each pattern maker is (pattern_observable, 'pattern name')
+user_speed = int(user_input.speed)
 pattern_makers = [
-    lambda: (full_random.get_observable(tick_period_ms=user_input.speed), 'Full Random'),
-    lambda: (tsunami.get_observable(tick_period_ms=user_input.speed), 'Tsunami'),
-    lambda: (sarlacc.get_observable(tick_period_ms=user_input.speed), 'Sarlacc'),
-    lambda: (radar.get_observable(tick_period_ms=user_input.speed), 'Radar'),
-    lambda: (crc.get_observable(tick_period_ms=user_input.speed), 'Counter Rotating Circles'),
-    lambda: (beach_ball.get_observable(tick_period_ms=user_input.speed), 'Beach Ball'),
-    lambda: (pulse.get_observable(tick_period_ms=user_input.speed), 'Pulse'),
-    lambda: (spiral.get_observable(tick_period_ms=user_input.speed), 'Spiral')
+    lambda: (full_random.get_pattern(tick_period_ms=user_speed), 'Full Random'),
+    lambda: (tsunami.get_pattern(tick_period_ms=user_speed), 'Tsunami'),
+    lambda: (sarlacc.get_pattern(tick_period_ms=user_speed), 'Sarlacc'),
+    lambda: (radar.get_pattern(tick_period_ms=user_speed), 'Radar'),
+    lambda: (crc.get_pattern(tick_period_ms=user_speed), 'Counter Rotating Circles'),
+    lambda: (beach_ball.get_pattern(tick_period_ms=user_speed), 'Beach Ball'),
+    lambda: (pulse.get_pattern(tick_period_ms=user_speed), 'Pulse'),
+    lambda: (spiral.get_pattern(tick_period_ms=user_speed), 'Spiral')
 ]
 
 # Try to create all types of players. Some will fail, which is fine.

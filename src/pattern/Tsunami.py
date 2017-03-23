@@ -1,8 +1,7 @@
 import pattern.PatternBuilder as PB
 import random
-from rx import Observable
 
-def get_observable(color=None, offset=0, tick_period_ms=0):
+def get_pattern(color=None, offset=0, tick_period_ms=0):
     if color is None: color = PB.random_color()
     if tick_period_ms <= 0: tick_period_ms = 200
 
@@ -15,6 +14,4 @@ def get_observable(color=None, offset=0, tick_period_ms=0):
         [unordered_frames[i] for i in range(0, 9, 2)] + \
         [unordered_frames[i] for i in range(9, 0, -2)]
 
-    return Observable.interval(tick_period_ms) \
-        .take(len(frames)) \
-        .map(lambda i: frames[i])
+    return (frames, tick_period_ms)

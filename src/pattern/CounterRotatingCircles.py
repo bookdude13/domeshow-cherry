@@ -1,5 +1,4 @@
 import pattern.PatternBuilder as PB
-from rx import Observable
 import random
 
 
@@ -8,7 +7,7 @@ def _set_colors(colors):
         return [c for i in range(5) for c in PB.random_color()]
     return colors
 
-def get_observable(colorsA=None, colorsB=None, tall=None, tick_period_ms=0):
+def get_pattern(colorsA=None, colorsB=None, tall=None, tick_period_ms=0):
     colors = [_set_colors(colorsA), _set_colors(colorsB)]
     if tall is None: tall = (random.randint(0, 1) == 1)
     if tick_period_ms <= 0: tick_period_ms = 200
@@ -24,6 +23,4 @@ def get_observable(colorsA=None, colorsB=None, tall=None, tick_period_ms=0):
             colors = [shifted[i % 2] for i in range(3)]
             frames[i] = PB.build3(colors)
 
-    return Observable.interval(tick_period_ms) \
-        .take(len(frames)) \
-        .map(lambda i: frames[i])
+    return (frames, tick_period_ms)

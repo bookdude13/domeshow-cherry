@@ -1,6 +1,8 @@
 import rx
 import random
 
+from PatternQueue import PatternQueue
+
 # This class holds all of the dome's patterns and runs them
 class Player:
     """
@@ -11,7 +13,7 @@ class Player:
 
     def __init__(self, output, pattern_makers):
         self._output = output
-        self._pattern_makers = pattern_makers
+        self._pattern_queue = PatternQueue(5, pattern_makers)
 
     # Convenience function to turn all lights off
     # Identical to run_solid(0, 0, 0)
@@ -30,14 +32,18 @@ class Player:
 
     # Continuously run randomly selected patterns
     def run_live(self):
-        # Choose a random pattern
-        pattern_idx = random.randrange(0, len(self._pattern_makers))
-        (pattern_stream, info) = self._pattern_makers[pattern_idx]()
+        # Get a random pattern
+        (name, pattern_frames, tick_period_ms) = self._pattern_queue.get()
         
         # Once a pattern finishes, inform the user and run again
         def _pattern_done():
-            print('Pattern {} completed'.format(info))
+            print('Pattern {} completed'.format(name))
             self.run_live()
+
+        # Create pattern stream
+        pattern_stream = rx.Observable.interval(tick_period_ms) \
+            .take(len(pattern_frames)) \
+            .map(lambda i: pattern_frames[i])
 
         # Run the pattern
         pattern_stream \
