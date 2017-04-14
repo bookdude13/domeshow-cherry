@@ -45,7 +45,7 @@ except IOError:
     print('Failed to open FileOutput with output "', user_input.output, '"', sep='')
 
 try:
-    sp = Player(SerialOutput(user_input.output), pattern_makers)
+    sp = Player(SerialOutput(user_input.output, baud=57600), pattern_makers)
 except serial.SerialException:
     print('Failed to open SerialOutput with output "', user_input.output, '"', sep='')
 
