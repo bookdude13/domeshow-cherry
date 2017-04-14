@@ -22,9 +22,9 @@ class SerialOutput:
 
     def send(self, data):
         packet = _create_packet(_patch(data))
-        for i in range(3):
-            self._output.write(packet)
-            time.sleep(0.15)
+        #for i in range(3):
+        self._output.write(packet)
+            #time.sleep(0.15)
 
 def _create_packet(data):
     magic = bytearray([0xde, 0xad, 0xbe, 0xef])
