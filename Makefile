@@ -1,5 +1,8 @@
 run: runDmx
 
+patch:
+	@python3 mapping/patch.py
+
 runFile:
 	@python3 -i src/Cherry.py -o "/tmp/cherrylog"
 
