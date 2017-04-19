@@ -14,6 +14,7 @@ class Player:
     def __init__(self, output, pattern_makers):
         self._output = output
         self._pattern_queue = PatternQueue(5, pattern_makers)
+        self._pattern_makers = pattern_makers
 
     # Convenience function to turn all lights off
     # Identical to run_solid(0, 0, 0)
@@ -61,7 +62,13 @@ class Player:
             raise ValueError("Invalid pattern - out of range")
         
         # Get the pattern
-        (pattern_stream, info) = self._pattern_makers[i]()
+        (pattern, name) = self._pattern_makers[i]()
+        (pattern_frames, tick_period_ms) = pattern
+
+        # Create pattern stream
+        pattern_stream = rx.Observable.interval(tick_period_ms) \
+            .take(len(pattern_frames)) \
+            .map(lambda i: pattern_frames[i])
 
         # Run the pattern
         pattern_stream \
