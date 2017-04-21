@@ -77,7 +77,7 @@ class Player:
             .subscribe(
                 on_next = self._output.send,
                 on_error = lambda e: self._output.close(str(e)),
-                on_completed = lambda: print('Pattern {} completed'.format(info)))
+                on_completed = lambda: print('Pattern {} completed'.format(name)))
 
 
 # Function that does nothing (used for Rx observables)
