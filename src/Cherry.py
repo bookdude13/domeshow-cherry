@@ -49,18 +49,19 @@ debug_patterns = [
 cp = Player(ConsoleOutput(), pattern_makers)
 try:
     fp = Player(FileOutput(user_input.output), pattern_makers)
-    dbg_fp = Player(FileOutput(user_input.output), debug_patterns)
+    #dbg_fp = Player(FileOutput(user_input.output), debug_patterns)
 except IOError:
     print('Failed to open FileOutput with output "', user_input.output, '"', sep='')
 
 try:
     sp = Player(SerialOutput(user_input.output, baud=57600), pattern_makers)
-    dbg_sp = Player(SerialOutput(user_input.output, baud=57600), debug_patterns)
+    #dbg_sp = Player(SerialOutput(user_input.output, baud=57600), debug_patterns)
 except serial.SerialException:
     print('Failed to open SerialOutput with output "', user_input.output, '"', sep='')
 
 try:
-    dp = Player(DmxOutput(user_input.output), pattern_makers)
-    dbg_dp = Player(DmxOutput(user_input.output), debug_patterns)
+    pass
+    #dp = Player(DmxOutput(user_input.output), pattern_makers)
+    #dbg_dp = Player(DmxOutput(user_input.output), debug_patterns)
 except (DMXException, UsbDmxProException, serial.SerialException):
     print('Failed to open DmxOutput with output "', user_input.output, '"', sep='')

@@ -23,12 +23,15 @@ class SerialOutput:
     def send(self, data):
         packet = _create_packet(_patch(data))
         for i in range(3):
+            # written = 0
+            # while written < packet_len:
             self._output.write(packet)
-            time.sleep(0.1)
+            # self._output.flush()
+            # time.sleep(0.15)
 
 def _create_packet(data):
     magic = bytearray([0xde, 0xad, 0xbe, 0xef])
-    length = Bits(uint=144, length=16).tobytes()
+    length = Bits(uint=120, length=16).tobytes()
     payload = Bits().join([Bits(uint=x, length=8) for x in data])
     patched_str = payload.tobytes()
     crc = Bits(uint=crc16.crc16xmodem(patched_str), length=16)
@@ -36,7 +39,7 @@ def _create_packet(data):
     return packet.tobytes()
 
 def _patch(data):
-    patched = [0] * 144
+    patched = [0] * 120
     patched[0] = data[0]
     patched[1] = data[1]
     patched[2] = data[2]
